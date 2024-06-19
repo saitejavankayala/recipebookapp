@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 function HomeStack() {
   return (
     <Stack.Navigator screenOptions={{headerShown:false}}>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen} />
     </Stack.Navigator>
   );
@@ -23,7 +23,7 @@ function Navigation() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="HomeStack" component={HomeStack} />
+        <Tab.Screen name="Home" component={HomeStack} />
         <Tab.Screen name="Favorites" component={FavoritesScreen} />
       </Tab.Navigator>
     </NavigationContainer>

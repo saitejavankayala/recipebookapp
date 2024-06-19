@@ -3,13 +3,13 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: 20,
     },
     searchBar: {
       height: 40,
       borderWidth: 1,
       padding: 10,
-      marginBottom: 20,
+      margin: 20,
+      marginBottom:40,
     },
     recipeCard: {
       flexDirection: 'row',
@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       overflow: 'hidden',
       elevation: 2,
+      marginHorizontal:20,
     },
     thumbnail: {
       width: 100,
