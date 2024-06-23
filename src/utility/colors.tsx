@@ -1,7 +1,8 @@
 const colors={
-    BACKGROUND_COLOR: "#1B2131",
-    PRIMARY_COLOR: "#0295E9",
+    BACKGROUND_COLOR:"#ececec",
+    PRIMARY_COLOR: "#193C6D",
     BLACK_COLOR: '#8A8A8A',
-    WHITE_COLOR: '#FFFFFF'
+    WHITE_COLOR: '#FFFFFF',
+    ERROR_COLOR: 'red',
 }
 export default colors;

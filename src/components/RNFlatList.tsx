@@ -7,9 +7,10 @@ interface RNFlatListProps<T> {
   keyExtractor: (item: T) => string;
   ListHeaderComponent?: () => JSX.Element | null;
   ListFooterComponent?: () => JSX.Element | null;
+  ListEmptyComponent?: () => JSX.Element | null;
 }
 
-const RNFlatList = <T,>({ data, renderItem, keyExtractor, ListHeaderComponent, ListFooterComponent }: RNFlatListProps<T>) => {
+const RNFlatList = <T,>({ data, renderItem, keyExtractor, ListHeaderComponent, ListFooterComponent, ListEmptyComponent }: RNFlatListProps<T>) => {
   return (
     <FlatList
       data={data}
@@ -17,6 +18,7 @@ const RNFlatList = <T,>({ data, renderItem, keyExtractor, ListHeaderComponent, L
       keyExtractor={keyExtractor}
       ListHeaderComponent={ListHeaderComponent}
       ListFooterComponent={ListFooterComponent}
+      ListEmptyComponent={ListEmptyComponent}
     />
   );
 };

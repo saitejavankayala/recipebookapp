@@ -1,18 +1,31 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../utility/colors';
+import { fontWeight } from '../../utility/fonts';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.BACKGROUND_COLOR,
   },
   recipeImage: {
     width: '100%',
     height: 200,
     resizeMode: 'cover',
   },
+  favoriteContainer: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    backgroundColor:colors.WHITE_COLOR,
+    borderRadius: 50,
+    elevation: 5,
+  },
+  favoriteIcon: {
+    padding: 10,
+  },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: fontWeight.Bold,
     textAlign: 'center',
     marginVertical: 10,
   },
@@ -27,21 +40,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginBottom: 20,
   },
-  sourceContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  sourceText: {
-    fontSize: 16,
-    marginRight: 5,
-  },
-  sourceLink: {
-    fontSize: 16,
-    color: 'blue',
-    textDecorationLine: 'underline',
-  },
+
 });
 
 export default styles;
