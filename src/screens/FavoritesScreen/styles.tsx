@@ -5,7 +5,6 @@ import colors from "../../utility/colors";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
   },
   errorContainer: {
     flex: 1,
@@ -15,18 +14,16 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   recipeCard: {
-    paddingTop:5,
-    flexDirection: 'row',
-    marginBottom: 20,
-    backgroundColor: colors.WHITE_COLOR,
-    borderRadius: 10,
-    overflow: 'hidden',
+    marginHorizontal:20,
     elevation: 2,
+    overflow: 'hidden',
+    flexDirection: 'row',
+    borderRadius: 24,
+    margin: 10,
+    backgroundColor: colors.WHITE_COLOR
   },
-  thumbnail: {
-    width: 100,
-    height: 100,
-  },
+  image:{ width: 140, height: 140 },
+  thumbnail: { fontSize: 21, fontWeight: 'bold', color: colors.BLACK_COLOR },
   recipeInfo: {
     flex: 1,
     padding: 10,
@@ -49,16 +46,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.WHITE_COLOR,
     borderRadius: 50,
     elevation: 5,
-    height:40,
-    width:40,
+    height:45,
+    width:45,
   },
   favoriteIcon: {
-    backgroundColor: colors.WHITE_COLOR,
-    height:40,
-    borderRadius: 50,
-    elevation: 5,
     padding: 10,
-    marginRight:10
   },
 });
 export default styles;

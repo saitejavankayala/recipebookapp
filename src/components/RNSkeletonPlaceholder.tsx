@@ -32,8 +32,7 @@ const SkeletonPlaceholder = () => {
   return (
     <View>
       <View style={styles.skeletonCard}>
-        <View style={styles.skeletonThumbnail} />
-        <View style={styles.skeletonInfo}>
+      <View style={styles.skeletonInfo}>
           <View style={styles.skeletonTitleContainer}>
             <Animated.View style={[styles.skeletonTitle, { transform: [{ translateX }] }]} />
           </View>
@@ -41,6 +40,8 @@ const SkeletonPlaceholder = () => {
             <Animated.View style={[styles.skeletonDescription, { transform: [{ translateX }] }]} />
           </View>
         </View>
+        <View style={styles.skeletonThumbnail} />
+       
       </View>
     </View>
   );

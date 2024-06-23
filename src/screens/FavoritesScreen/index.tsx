@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList, TouchableOpacity, Image, Alert } from "react-native";
+import { View, Text, FlatList, TouchableOpacity, Image, Alert, TouchableNativeFeedback } from "react-native";
 import styles from "./styles";
 import { getFavoriteRecipes, removeFavoriteRecipe } from "../../utility/localStorage";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import colors from "../../utility/colors";
+import RNFastImage from "../../components/RNFastImage";
+import RNText from "../../components/RNText";
+import navigation from "../../navigation";
 
 
-const FavoritesScreen = () => {
+const FavoritesScreen = (props: { navigation: any }) => {
+  const { navigation } = props;
   const [favorites, setFavorites] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -31,31 +35,47 @@ const FavoritesScreen = () => {
       await removeFavoriteRecipe(recipeId);
       loadFavorites();
       Alert.alert('Success', 'Recipe removed from favorites.');
-    } catch (error:any) {
+    } catch (error: any) {
       Alert.alert(error);
     }
   };
 
-  const renderItem = ({ item }: { item: Recipe }) => (
 
-    <View style={styles.recipeCard}>
-       
-      <Image style={styles.thumbnail} source={{ uri: item.strMealThumb }} />
-      <View style={styles.recipeInfo}>
-        <Text style={styles.title}>{item.strMeal}</Text>
-        <Text style={styles.description}>
-          {item?.strInstructions?.substring(0, 50)}...
-        </Text>
+  const RecipeListItem = ({ item }: { item: Recipe }) => {
+    return (
+      <TouchableNativeFeedback
+      background={TouchableNativeFeedback.Ripple('#00000040', false)}
+      useForeground={true}
+      onPress={() => navigation.navigate("RecipeDetail", { recipe: item })}>
+    
+      <View style={styles.recipeCard}>
+        <View style={{ flex: 1, padding: 16 }}>
+          <RNText numberOfLines={2} style={styles.thumbnail} ellipsizeMode='tail'>{item.strMeal}</RNText>
+          <RNText numberOfLines={3} ellipsizeMode='tail'>{item.strInstructions}</RNText> 
+        </View>
+        <View style={{ borderRadius: 24, overflow: 'hidden' }}>
+          <RNFastImage
+            source={{
+              uri: item.strMealThumb,
+            }}
+            style={styles.image}
+          />
+        </View>
+        <View style={styles.favoriteContainer}>
+          <AntDesign
+            name={'heart'}
+            color={colors.PRIMARY_COLOR}
+            size={25}
+            onPress={() => removeFromFavorites(item.idMeal)}
+            style={styles.favoriteIcon}
+          />
+        </View>
       </View>
-      <AntDesign
-          name={'heart'}
-          color={colors.PRIMARY_COLOR}
-          size={20}
-          onPress={()=>removeFromFavorites(item.idMeal)}
-          style={styles.favoriteIcon}
-        />
-    </View>
-  );
+</TouchableNativeFeedback>
+    );
+  };
+
+
 
   if (loading) {
     return (
@@ -69,7 +89,7 @@ const FavoritesScreen = () => {
       {favorites.length > 0 ? (
         <FlatList
           data={favorites}
-          renderItem={renderItem}
+          renderItem={RecipeListItem}
           keyExtractor={(item) => item.idMeal}
         />
       ) : (

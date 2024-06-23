@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
 import styles from "./styles";
 import { fetchRecipes } from "../../services/api";
 import RNTextInput from "../../components/RNTextInput";
@@ -21,10 +21,6 @@ const HomeScreen = (props: { navigation: any }) => {
   const [search, setSearch] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    loadRecipes();
-  }, []);
-
   const handleSearch = (text: string) => {
     setSearch(text);
   };
@@ -45,17 +41,25 @@ const HomeScreen = (props: { navigation: any }) => {
 
   const RecipeListItem = ({ item }: { item: Recipe }) => {
     return (
-      <TouchableOpacity onPress={() => navigation.navigate("RecipeDetail", { recipe: item })}>
+      <TouchableNativeFeedback
+      background={TouchableNativeFeedback.Ripple('#00000040', false)}
+      useForeground={true}
+      onPress={() => navigation.navigate("RecipeDetail", { recipe: item })}>
         <View style={styles.recipeCard}>
-          <RNFastImage style={styles.thumbnail} source={{ uri: item.strMealThumb }} />
-          <View style={styles.recipeInfo}>
-            <RNText style={styles.title}>{item.strMeal}</RNText>
-            <RNText style={styles.description}>
-              {item.strInstructions.substring(0, 100)}...
-            </RNText>
+          <View style={{ flex: 1, padding: 16 }}>
+            <RNText numberOfLines={2}  style={styles.thumbnail} ellipsizeMode='tail'>{item.strMeal}</RNText>
+            <RNText numberOfLines={3} ellipsizeMode='tail'>{item.strInstructions}</RNText>
+          </View>
+          <View style={{ borderRadius: 24, overflow: 'hidden' }}>
+            <RNFastImage
+              source={{
+                uri: item.strMealThumb,
+              }}
+              style={styles.image}
+            />
           </View>
         </View>
-      </TouchableOpacity>
+      </TouchableNativeFeedback>
     );
   };
 

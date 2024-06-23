@@ -9,7 +9,6 @@ import FavoritesScreen from '../screens/FavoritesScreen';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import colors from '../utility/colors';
-import { View } from 'react-native';
 import RNText from '../components/RNText';
 import styles from './styles';
 const Stack = createStackNavigator();
@@ -50,11 +49,47 @@ function HomeStack() {
   );
 }
 
+function FavoritesStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Favorites" component={FavoritesScreen}
+      options={{
+        headerShown:true,
+        headerTitleAlign: 'left',
+        headerTitle: (props) => (
+         
+          <RNText style={styles.headerStyles}>
+              Favorites
+          </RNText>
+     
+
+        )
+      }}
+      />
+      <Stack.Screen name="RecipeDetail" component={RecipeDetailScreen}
+        options={{
+          headerShown: true,
+          headerTitleAlign: 'left',
+          headerStyle: { backgroundColor: colors.WHITE_COLOR },
+         
+          headerTitle: (props) => (
+            <RNText style={styles.headerStyles}>
+              Recipe Details
+          </RNText>
+          )
+        }}
+
+      />
+    </Stack.Navigator>
+  );
+}
+
 function Navigation() {
   return (
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
+          headerShown: false,
           unmountOnBlur: true,
           tabBarIcon: ({ focused, color, size }) => {
             if (route.name === 'Home') {
@@ -70,10 +105,8 @@ function Navigation() {
         })}
 
       >
-        <Tab.Screen name="Home" component={HomeStack} options={{
-          headerShown: false
-        }} />
-        <Tab.Screen name="Favorites" component={FavoritesScreen} />
+        <Tab.Screen name="Home" component={HomeStack} />
+        <Tab.Screen name="Favorites" component={FavoritesStack} />
       </Tab.Navigator>
     </NavigationContainer>
   );
